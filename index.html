@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Tienda PC - Inicio</title><link rel="stylesheet" href="style.css"><script defer src="script.js"></script></head><body>
+<header class="header container"><div class="brand">🖥 <strong>Tienda PC</strong></div><nav class="nav"><a href="index.html" class="active">Inicio</a><a href="productos.html">Catálogo</a><a href="procesadores_intel.html">Intel</a><a href="procesadores_ryzen.html">Ryzen</a><a href="gpus_nvidia.html">NVIDIA</a><a href="gpus_amd.html">AMD</a><a href="contacto.html">Contacto</a><button id="cart-btn" class="cart-btn">🛒 <span id="cart-count">0</span></button></nav></header>
+<section class="hero container">
+  <div class="hero-left">
+    <h1>Tu tienda de hardware — profesional</h1>
+    <p class="lead">Encuentra procesadores, tarjetas gráficas, laptops y periféricos con imágenes reales y carrito funcional.</p>
+    <p><a class="btn" href="productos.html">Ver catálogo</a></p>
+  </div>
+  <div style="max-width:38%"><img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=800&auto=format&fit=crop" alt="banner" style="border-radius:12px;width:100%"></div>
+</section>
+<section class="section container"><h2>Ofertas destacadas</h2><div class="grid">
+<article class="card">
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStRc5jHqVVIc8uxI0f4P7a7j8qfYD_1MhMuw&s" alt="Intel Core i3-13100">
+  <h3>Intel Core i3-13100</h3>
+  <p class="desc">Procesador Intel i3, 4C/8T</p>
+  <div class="meta"><span class="price">S/ 499</span></div>
+  <button class="add" data-sku="intel_i3_13100" data-name="Intel Core i3-13100" data-price="499" data-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStRc5jHqVVIc8uxI0f4P7a7j8qfYD_1MhMuw&s">Agregar</button>
+</article><article class="card">
+  <img src="https://images.unsplash.com/photo-1517433456452-f9633a875f6f?q=80&w=1000&auto=format&fit=crop" alt="Intel Core i5-13600K">
+  <h3>Intel Core i5-13600K</h3>
+  <p class="desc">Procesador Intel i5, 14C/20T</p>
+  <div class="meta"><span class="price">S/ 1199</span></div>
+  <button class="add" data-sku="intel_i5_13600" data-name="Intel Core i5-13600K" data-price="1199" data-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVMtltq_nEhXh3LXKpPBryPAPI60OEWeAarw&s">Agregar</button>
+</article><article class="card">
+  <img src="https://oechsle.vteximg.com.br/arquivos/ids/17316649-1000-1000/imageUrl_1.jpg?v=638421473746970000" alt="Intel Core i7-13700">
+  <h3>Intel Core i7-13700</h3>
+  <p class="desc">Procesador Intel i7, 16C/24T</p>
+  <div class="meta"><span class="price">S/ 1699</span></div>
+  <button class="add" data-sku="intel_i7_13700" data-name="Intel Core i7-13700" data-price="1699" data-img="https://promart.vteximg.com.br/arquivos/ids/6763204-1000-1000/image-66d66301e8cf4353859b616ed10115ac.jpg?v=638128520164400000">Agregar</button>
+</article><article class="card">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/c/c5/Intel_Core_i9_2020_logo.svg" alt="Intel Core i9-13900K">
+  <h3>Intel Core i9-13900K</h3>
+  <p class="desc">Procesador Intel i9, alto rendimiento</p>
+  <div class="meta"><span class="price">S/ 2299</span></div>
+  <button class="add" data-sku="intel_i9_13900k" data-name="Intel Core i9-13900K" data-price="2299" data-img="https://upload.wikimedia.org/wikipedia/commons/c/c5/Intel_Core_i9_2020_logo.svg">Agregar</button>
+</article><article class="card">
+  <img src="https://yamoshi.com.pe/32592-large_default/procesador-amd-ryzen-5-7600-100-100001015box-38ghz-32mb-am5.jpg" alt="AMD Ryzen 5 7600">
+  <h3>AMD Ryzen 5 7600</h3>
+  <p class="desc">6C/12T, buena relación</p>
+  <div class="meta"><span class="price">S/ 899</span></div>
+  <button class="add" data-sku="ryzen_5_7600" data-name="AMD Ryzen 5 7600" data-price="899" data-img="https://images.unsplash.com/photo-1587202372644-63d3a8448e7d?q=80&w=1000&auto=format&fit=crop">Agregar</button>
+</article><article class="card">
+  <img src="https://images.unsplash.com/photo-1512197555840-6b3d7f6f1f11?q=80&w=1000&auto=format&fit=crop" alt="AMD Ryzen 7 7700X">
+  <h3>AMD Ryzen 7 7700X</h3>
+  <p class="desc">8C/16T</p>
+  <div class="meta"><span class="price">S/ 1899</span></div>
+  <button class="add" data-sku="ryzen_7_7700x" data-name="AMD Ryzen 7 7700X" data-price="1899" data-img="https://images.unsplash.com/photo-1512197555840-6b3d7f6f1f11?q=80&w=1000&auto=format&fit=crop">Agregar</button>
+</article><article class="card">
+  <img src="https://images.unsplash.com/photo-1512197555840-6b3d7f6f1f11?q=80&w=1000&auto=format&fit=crop" alt="AMD Ryzen 9 7950X">
+  <h3>AMD Ryzen 9 7950X</h3>
+  <p class="desc">16C/32T</p>
+  <div class="meta"><span class="price">S/ 2199</span></div>
+  <button class="add" data-sku="ryzen_9_7950x" data-name="AMD Ryzen 9 7950X" data-price="2199" data-img="https://images.unsplash.com/photo-1512197555840-6b3d7f6f1f11?q=80&w=1000&auto=format&fit=crop">Agregar</button>
+</article><article class="card">
+  <img src="https://images.unsplash.com/photo-1587202372795-2a1b7eeada81?q=80&w=1000&auto=format&fit=crop" alt="NVIDIA GeForce RTX 3050">
+  <h3>NVIDIA GeForce RTX 3050</h3>
+  <p class="desc">6GB GDDR6</p>
+  <div class="meta"><span class="price">S/ 1199</span></div>
+  <button class="add" data-sku="rtx_3050" data-name="NVIDIA GeForce RTX 3050" data-price="1199" data-img="https://images.unsplash.com/photo-1587202372795-2a1b7eeada81?q=80&w=1000&auto=format&fit=crop">Agregar</button>
+</article></div></section><aside id='cart-drawer' aria-hidden='true'><header><h3>Tu carrito</h3><button id='close-cart'>✕</button></header><div id='cart-items'></div><div class='cart-footer'><div>Total: <strong id='cart-total'>S/ 0</strong></div><button id='checkout' class='btn'>Pagar</button></div></aside><div id='toast'></div><footer class='footer container'><p>© 2025 Tienda PC — Demo</p></footer></body></html>

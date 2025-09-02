@@ -1,0 +1,36 @@
+/* Tienda PC — Estilos generales */
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto;background:linear-gradient(180deg,#0b0e14,#0e1117);color:#eaf2fb;min-height:100vh}
+.container{max-width:1200px;margin:0 auto;padding:0 20px}
+.header{display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.04);position:sticky;top:0;background:rgba(8,10,14,.7);backdrop-filter:blur(6px);z-index:30}
+.brand{font-weight:800;display:flex;align-items:center;gap:10px}
+.nav{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.nav a{color:#c6d3e8;text-decoration:none;padding:8px 12px;border-radius:8px}
+.nav a.active,.nav a:hover{background:rgba(255,255,255,.04);color:#fff}
+.cart-btn{background:rgba(32,192,223,.12);border:1px solid rgba(255,255,255,.06);padding:8px 10px;border-radius:999px;color:#bfeeff;cursor:pointer}
+.hero{padding:36px 0;display:flex;gap:20px;align-items:center;justify-content:space-between}
+.hero-left{max-width:60%}
+.hero h1{margin:0 0 8px;font-size:clamp(24px,3.6vw,40px)}.hero p{color:#b9c4da}
+.btn{background:#20c0df;color:#042f38;padding:10px 14px;border-radius:10px;border:none;font-weight:700}
+.section{padding:28px 0}.lead{color:#a7b0c8;margin-top:6px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:16px}
+@media(max-width:1100px){.grid{grid-template-columns:repeat(3,1fr)}}@media(max-width:760px){.grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:420px){.grid{grid-template-columns:1fr}}
+.card{background:linear-gradient(180deg,#18233a,#131c2f);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 8px 24px rgba(0,0,0,.35)}
+.card img{width:100%;height:160px;object-fit:cover}
+.card h3{margin:12px 12px 6px;font-size:16px}.card p{margin:0 12px;color:#a7b0c8}
+.card .meta{display:flex;justify-content:space-between;align-items:center;padding:0 12px 12px}
+.card button{margin:12px;background:transparent;border:1px solid rgba(255,255,255,.06);padding:10px;border-radius:8px;color:#e9eef9;cursor:pointer}
+.card button:hover{background:rgba(255,255,255,.03)}
+#cart-drawer{position:fixed;top:0;right:-420px;width:380px;height:100vh;background:#0d1320;border-left:1px solid rgba(255,255,255,.04);transition:right .28s ease;z-index:60;display:flex;flex-direction:column}
+#cart-drawer.open{right:0}
+#cart-drawer header{display:flex;justify-content:space-between;align-items:center;padding:12px;border-bottom:1px solid rgba(255,255,255,.04)}
+#cart-items{padding:12px;overflow:auto;flex:1;display:grid;gap:10px}
+.cart-item{display:flex;gap:10px;align-items:center;background:#0f1724;padding:8px;border-radius:10px;border:1px solid rgba(255,255,255,.03)}
+.cart-item img{width:56px;height:56px;object-fit:cover;border-radius:8px}
+.cart-item .info{flex:1}
+.cart-item .info .name{font-size:14px}.cart-item .info .price{color:#7ee7b6;font-weight:700}
+.qty-controls{display:flex;gap:6px;align-items:center}
+.qty-controls button{padding:6px 8px;border-radius:8px;border:1px solid rgba(255,255,255,.04);background:transparent;color:#fff;cursor:pointer}
+.cart-footer{padding:12px;border-top:1px solid rgba(255,255,255,.04)}
+#toast{position:fixed;left:50%;bottom:16px;transform:translateX(-50%) translateY(120%);background:#0d1423;padding:10px 14px;border-radius:10px;border:1px solid rgba(255,255,255,.04);opacity:0;transition:all .25s ease;z-index:70}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.footer{padding:20px 0;border-top:1px solid rgba(255,255,255,.04);text-align:center;color:#8aa0c7;margin-top:30px}
