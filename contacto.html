@@ -1,1 +1,85 @@
-<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Contacto - Tienda PC</title><link rel="stylesheet" href="style.css"><script defer src="script.js"></script></head><body><header class="header container"><div class="brand">🖥 <strong>Tienda PC</strong></div><nav class="nav"><a href="index.html">Inicio</a><a href="productos.html">Catálogo</a><a href="procesadores_intel.html">Intel</a><a href="procesadores_ryzen.html">Ryzen</a><a href="gpus_nvidia.html">NVIDIA</a><a href="gpus_amd.html">AMD</a><a class="active" href="contacto.html">Contacto</a><button id="cart-btn" class="cart-btn">🛒 <span id="cart-count">0</span></button></nav></header><main class="container section"><h1>Contacto</h1><p class="lead">Dudas, cotizaciones y soporte técnico.</p><form id="contact-form" class="contact-form"><label>Nombre<input id="nombre" required></label><label>Email<input id="email" type="email" required></label><label>Mensaje<textarea id="mensaje" rows="6" required></textarea></label><button class="btn" type="submit">Enviar</button></form></main><aside id="cart-drawer" aria-hidden="true"><header><h3>Tu carrito</h3><button id="close-cart">✕</button></header><div id="cart-items"></div><div class='cart-footer'><div>Total: <strong id='cart-total'>S/ 0</strong></div><button id='checkout' class='btn'>Pagar</button></div></aside><div id='toast'></div><footer class='footer container'><p>© 2025 Tienda PC — Demo</p></footer></body></html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Contacto - Tienda PC</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand" href="#">🖥 <strong>Tienda PC</strong></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+        <li class="nav-item"><a class="nav-link" href="productos.html">Catálogo</a></li>
+        <li class="nav-item"><a class="nav-link" href="procesadores_intel.html">Intel</a></li>
+        <li class="nav-item"><a class="nav-link" href="procesadores_ryzen.html">Ryzen</a></li>
+        <li class="nav-item"><a class="nav-link" href="gpus_nvidia.html">NVIDIA</a></li>
+        <li class="nav-item"><a class="nav-link" href="gpus_amd.html">AMD</a></li>
+        <li class="nav-item"><a class="nav-link active" href="contacto.html">Contacto</a></li>
+      </ul>
+      <button class="btn btn-outline-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartDrawer">
+        🛒 <span id="cart-count" class="badge bg-danger">0</span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Contacto -->
+<main class="container py-5">
+  <h1 class="mb-3">Contacto</h1>
+  <p class="lead">Dudas, cotizaciones y soporte técnico.</p>
+
+  <form id="contact-form" class="row g-3">
+    <div class="col-md-6">
+      <label for="nombre" class="form-label">Nombre</label>
+      <input id="nombre" type="text" class="form-control" required>
+    </div>
+    <div class="col-md-6">
+      <label for="email" class="form-label">Email</label>
+      <input id="email" type="email" class="form-control" required>
+    </div>
+    <div class="col-12">
+      <label for="mensaje" class="form-label">Mensaje</label>
+      <textarea id="mensaje" class="form-control" rows="6" required></textarea>
+    </div>
+    <div class="col-12">
+      <button class="btn btn-primary" type="submit">Enviar</button>
+    </div>
+  </form>
+</main>
+
+<!-- Carrito (Offcanvas) -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="cartDrawer">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title">Tu carrito</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
+  </div>
+  <div class="offcanvas-body">
+    <div id="cart-items"></div>
+    <div class="mt-3">
+      <p>Total: <strong id="cart-total">S/ 0</strong></p>
+      <button id="checkout" class="btn btn-primary w-100">Pagar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="bg-dark text-white text-center py-3 mt-5">
+  <p class="mb-0">© 2025 Tienda PC — Demo</p>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Tu JS -->
+<script src="script.js"></script>
+</body>
+</html>
