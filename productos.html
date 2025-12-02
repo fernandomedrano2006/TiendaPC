@@ -132,6 +132,13 @@
     /* FOOTER */
     footer { text-align:center; padding:1.4rem 0; color:var(--muted); margin-top:2.2rem; border-top: 1px solid rgba(255,255,255,0.02) }
 
+    /* Loading */
+    .loading {
+      text-align: center;
+      padding: 3rem;
+      color: var(--muted);
+    }
+
     @media (max-width:768px) {
       .product-img { height:140px }
     }
@@ -161,6 +168,7 @@
         </div>
       </div>
     </div>
+    <div id="user-info" class="d-flex align-items-center"></div>
   </nav>
 
   <!-- HERO -->
@@ -168,12 +176,6 @@
     <div class="container">
       <h1>Catálogo — Modo Gaming</h1>
       <p>Procesadores y GPUs — Intel, AMD Ryzen, NVIDIA y AMD. Agrega al carrito y procede al pago.</p>
-      <div class="mt-2">
-        <a href="#intel" class="btn btn-sm btn-outline-light me-1">Intel</a>
-        <a href="#ryzen" class="btn btn-sm btn-outline-light me-1">Ryzen</a>
-        <a href="#nvidia" class="btn btn-sm btn-outline-light me-1">NVIDIA</a>
-        <a href="#amd" class="btn btn-sm btn-outline-light">AMD</a>
-      </div>
     </div>
   </header>
 
@@ -181,206 +183,20 @@
 
     <!-- FILTERS -->
     <div class="filters">
-      <div class="filter-chip active" data-filter="all">Todos</div>
+      <div class="filter-chip active" data-filter="todos">Todos</div>
       <div class="filter-chip" data-filter="intel">Intel</div>
       <div class="filter-chip" data-filter="ryzen">Ryzen</div>
       <div class="filter-chip" data-filter="nvidia">NVIDIA</div>
       <div class="filter-chip" data-filter="amd">AMD</div>
-      <div class="filter-chip" data-filter="budget">Hasta S/ 1500</div>
-      <div class="filter-chip" data-filter="premium">Premium</div>
     </div>
 
-    <!-- INTEL -->
-    <section id="intel" class="mb-5">
-      <h3 style="color:#dbe9ff; font-weight:800; margin-bottom:1rem">Procesadores Intel</h3>
-      <div class="row g-4">
-        <!-- i3 -->
-        <div class="col-md-6 col-lg-4">
-          <div class="product-card" data-brand="intel" data-price="499">
-            <div class="product-img"><img src="img/i3.png" alt="Intel Core i3-13100"></div>
-            <div class="card-body">
-              <div class="card-title">Intel Core i3-13100</div>
-              <div class="product-specs"><span class="spec-badge">4C/8T</span><span class="spec-badge">12MB</span></div>
-              <div class="text-muted" style="font-size:.88rem">Rendimiento eficiente para tareas cotidianas y gaming ligero.</div>
-              <div class="product-price">S/ 499</div>
-              <button class="btn-add" data-nombre="Intel Core i3-13100" data-precio="499" data-img="img/intel_i3.jpg"><i class="fas fa-cart-plus me-2"></i>Agregar</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- i5 -->
-        <div class="col-md-6 col-lg-4">
-          <div class="product-card" data-brand="intel" data-price="899">
-            <div class="product-img"><img src="img/i5.jpg" alt="Intel Core i5-12400"></div>
-            <div class="card-body">
-              <div class="card-title">Intel Core i5-12400</div>
-              <div class="product-specs"><span class="spec-badge">6C/12T</span><span class="spec-badge">18MB</span></div>
-              <div class="text-muted" style="font-size:.88rem">Equilibrio ideal para gaming 1080p/1440p.</div>
-              <div class="product-price">S/ 899</div>
-              <button class="btn-add" data-nombre="Intel Core i5-12400" data-precio="899" data-img="img/intel_i5.jpg"><i class="fas fa-cart-plus me-2"></i>Agregar</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- i7 -->
-        <div class="col-md-6 col-lg-4">
-          <div class="product-card" data-brand="intel" data-price="1199">
-            <div class="product-img"><img src="img/i7.png" alt="Intel Core i7-12700"></div>
-            <div class="card-body">
-              <div class="card-title">Intel Core i7-12700</div>
-              <div class="product-specs"><span class="spec-badge">12C/20T</span><span class="spec-badge">25MB</span></div>
-              <div class="text-muted" style="font-size:.88rem">Gran rendimiento para creación y streaming.</div>
-              <div class="product-price">S/ 1,199</div>
-              <button class="btn-add" data-nombre="Intel Core i7-12700" data-precio="1199" data-img="img/intel_i7.jpg"><i class="fas fa-cart-plus me-2"></i>Agregar</button>
-            </div>
-          </div>
-        </div>
+    <!-- PRODUCTOS CONTAINER -->
+    <div id="productos-container" class="row g-4">
+      <div class="loading">
+        <i class="fas fa-spinner fa-spin fa-3x"></i>
+        <p class="mt-3">Cargando productos...</p>
       </div>
-    </section>
-
-    <!-- RYZEN -->
-    <section id="ryzen" class="mb-5">
-      <h3 style="color:#dbe9ff; font-weight:800; margin-bottom:1rem">Procesadores AMD Ryzen</h3>
-      <div class="row g-4">
-        <!-- Ryzen 5 -->
-        <div class="col-md-6 col-lg-4">
-          <div class="product-card" data-brand="ryzen" data-price="599">
-            <div class="product-img"><img src="img/ry5.jpg" alt="AMD Ryzen 5 5600"></div>
-            <div class="card-body">
-              <div class="card-title">AMD Ryzen 5 5600</div>
-              <div class="product-specs"><span class="spec-badge">6C/12T</span><span class="spec-badge">32MB</span></div>
-              <div class="text-muted" style="font-size:.88rem">Favorito por su relación precio/rendimiento.</div>
-              <div class="product-price">S/ 599</div>
-              <button class="btn-add" data-nombre="AMD Ryzen 5 5600" data-precio="599" data-img="img/ryzen_5.jpg"><i class="fas fa-cart-plus me-2"></i>Agregar</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Ryzen 7 -->
-        <div class="col-md-6 col-lg-4">
-          <div class="product-card" data-brand="ryzen" data-price="999">
-            <div class="product-img"><img src="img/ry7.png" alt="AMD Ryzen 7 5800X"></div>
-            <div class="card-body">
-              <div class="card-title">AMD Ryzen 7 5800X</div>
-              <div class="product-specs"><span class="spec-badge">8C/16T</span><span class="spec-badge">32MB</span></div>
-              <div class="text-muted" style="font-size:.88rem">Excelente multi-hilo para productividad y juego.</div>
-              <div class="product-price">S/ 999</div>
-              <button class="btn-add" data-nombre="AMD Ryzen 7 5800X" data-precio="999" data-img="img/ryzen_7.jpg"><i class="fas fa-cart-plus me-2"></i>Agregar</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Ryzen 9 -->
-        <div class="col-md-6 col-lg-4">
-          <div class="product-card" data-brand="ryzen" data-price="1799">
-            <div class="product-img"><img src="img/ry90.avif" alt="AMD Ryzen 9 7900X"></div>
-            <div class="card-body">
-              <div class="card-title">AMD Ryzen 9 7900X</div>
-              <div class="product-specs"><span class="spec-badge">12C/24T</span><span class="spec-badge">64MB</span></div>
-              <div class="text-muted" style="font-size:.88rem">Rendimiento extremo para creadores y juego.</div>
-              <div class="product-price">S/ 1,799</div>
-              <button class="btn-add" data-nombre="AMD Ryzen 9 7900X" data-precio="1799" data-img="img/ryzen_9.jpg"><i class="fas fa-cart-plus me-2"></i>Agregar</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- NVIDIA -->
-    <section id="nvidia" class="mb-5">
-      <h3 style="color:#dbe9ff; font-weight:800; margin-bottom:1rem">GPUs NVIDIA</h3>
-      <div class="row g-4">
-        <!-- RTX 3060 -->
-        <div class="col-md-6 col-lg-4">
-          <div class="product-card" data-brand="nvidia" data-price="1899">
-            <div class="product-img"><img src="img/ind3060.png" alt="NVIDIA RTX 3060"></div>
-            <div class="card-body">
-              <div class="card-title">NVIDIA RTX 3060</div>
-              <div class="product-specs"><span class="spec-badge">12GB</span><span class="spec-badge">Ray Tracing</span></div>
-              <div class="text-muted" style="font-size:.88rem">Buena opción para 1080p/1440p.</div>
-              <div class="product-price">S/ 1,899</div>
-              <button class="btn-add" data-nombre="NVIDIA RTX 3060" data-precio="1899" data-img="img/rtx_3060.jpg"><i class="fas fa-cart-plus me-2"></i>Agregar</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- RTX 4070 -->
-        <div class="col-md-6 col-lg-4">
-          <div class="product-card" data-brand="nvidia" data-price="3499">
-            <div class="product-img"><img src="img/rtx4070.jpg" alt="NVIDIA RTX 4070"></div>
-            <div class="card-body">
-              <div class="card-title">NVIDIA RTX 4070</div>
-              <div class="product-specs"><span class="spec-badge">12GB</span><span class="spec-badge">DLSS 3</span></div>
-              <div class="text-muted" style="font-size:.88rem">Eficiencia y potencia moderna.</div>
-              <div class="product-price">S/ 3,499</div>
-              <button class="btn-add" data-nombre="NVIDIA RTX 4070" data-precio="3499" data-img="img/rtx_4070.jpg"><i class="fas fa-cart-plus me-2"></i>Agregar</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- RTX 4090 -->
-        <div class="col-md-6 col-lg-4">
-          <div class="product-card" data-brand="nvidia" data-price="5999">
-            <div class="product-img"><img src="img/rtx4090.png" alt="NVIDIA RTX 4090"></div>
-            <div class="card-body">
-              <div class="card-title">NVIDIA RTX 4090</div>
-              <div class="product-specs"><span class="spec-badge">24GB</span><span class="spec-badge">Tope de gama</span></div>
-              <div class="text-muted" style="font-size:.88rem">Máxima potencia para 4K y profesionales.</div>
-              <div class="product-price">S/ 5,999</div>
-              <button class="btn-add" data-nombre="NVIDIA RTX 4090" data-precio="5999" data-img="img/rtx_4090.jpg"><i class="fas fa-cart-plus me-2"></i>Agregar</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- AMD -->
-    <section id="amd" class="mb-5">
-      <h3 style="color:#dbe9ff; font-weight:800; margin-bottom:1rem">GPUs AMD</h3>
-      <div class="row g-4">
-        <!-- RX 6600 -->
-        <div class="col-md-6 col-lg-4">
-          <div class="product-card" data-brand="amd" data-price="1299">
-            <div class="product-img"><img src="img/adm6600.jpg" alt="AMD RX 6600"></div>
-            <div class="card-body">
-              <div class="card-title">AMD RX 6600</div>
-              <div class="product-specs"><span class="spec-badge">8GB</span><span class="spec-badge">132W</span></div>
-              <div class="text-muted" style="font-size:.88rem">Gran eficiencia para 1080p.</div>
-              <div class="product-price">S/ 1,299</div>
-              <button class="btn-add" data-nombre="AMD RX 6600" data-precio="1299" data-img="img/rx_6600.jpg"><i class="fas fa-cart-plus me-2"></i>Agregar</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- RX 7800 XT -->
-        <div class="col-md-6 col-lg-4">
-          <div class="product-card" data-brand="amd" data-price="2499">
-            <div class="product-img"><img src="img/rx7800.png" alt="AMD RX 7800 XT"></div>
-            <div class="card-body">
-              <div class="card-title">AMD RX 7800 XT</div>
-              <div class="product-specs"><span class="spec-badge">16GB</span><span class="spec-badge">RDNA3</span></div>
-              <div class="text-muted" style="font-size:.88rem">Rendimiento superior para 1440p/4K.</div>
-              <div class="product-price">S/ 2,499</div>
-              <button class="btn-add" data-nombre="AMD RX 7800 XT" data-precio="2499" data-img="img/rx_7800xt.jpg"><i class="fas fa-cart-plus me-2"></i>Agregar</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- RX 7900 XTX -->
-        <div class="col-md-6 col-lg-4">
-          <div class="product-card" data-brand="amd" data-price="4799">
-            <div class="product-img"><img src="img/rx7900.png" alt="AMD RX 7900 XTX"></div>
-            <div class="card-body">
-              <div class="card-title">AMD RX 7900 XTX</div>
-              <div class="product-specs"><span class="spec-badge">24GB</span><span class="spec-badge">RDNA3</span></div>
-              <div class="text-muted" style="font-size:.88rem">Potencia extrema para 4K y más.</div>
-              <div class="product-price">S/ 4,799</div>
-              <button class="btn-add" data-nombre="AMD RX 7900 XTX" data-precio="4799" data-img="img/rx_7900xtx.jpg"><i class="fas fa-cart-plus me-2"></i>Agregar</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    </div>
 
   </main>
 
@@ -410,37 +226,172 @@
 
   <!-- SCRIPTS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  
   <script>
-    /******************************************************************
-     * Carrito (modo gaming) - Guardado en localStorage:
-     * llave carrito -> array de { nombre, precio, imagen, cantidad }
-     * llave totalCarrito -> string número con 2 decimales
-     * sesión de usuario: localStorage.usuarioActivo (JSON)
-     ******************************************************************/
+    // ========== CONFIGURACIÓN SUPABASE ==========
+    const SUPABASE_URL = 'https://vxdfhmakqjmnevmovdhw.supabase.co';
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ4ZGZobWFrcWptbmV2bW92ZGh3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ2MzYxNDAsImV4cCI6MjA4MDIxMjE0MH0.PhpdMBpEs0qGFtGtGYX9mL-Y5EI0qf219VviwETwb4M';
+    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-    // Inicialización
+    // ========== VARIABLES GLOBALES ==========
     let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    let todosLosProductos = [];
+    let filtroActual = 'todos';
 
-    // Utilidad para formatear
+    // ========== FUNCIONES UTILIDAD ==========
     function fmt(n) {
       return Number(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     }
 
-    // Actualiza badge, offcanvas y localStorage del total
+    function escapeHtml(str) {
+      return (''+str).replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    }
+
+    // ========== CARGAR PRODUCTOS DESDE SUPABASE ==========
+    async function cargarProductos() {
+      try {
+        const { data: productos, error } = await supabase
+          .from('productos')
+          .select('*')
+          .order('categoria', { ascending: true });
+
+        if (error) throw error;
+
+        todosLosProductos = productos;
+        mostrarProductos(productos);
+      } catch (error) {
+        console.error('Error al cargar productos:', error);
+        document.getElementById('productos-container').innerHTML = `
+          <div class="col-12">
+            <div class="alert alert-danger">
+              <i class="fas fa-exclamation-triangle me-2"></i>
+              Error al cargar los productos. Verifica tu conexión a Supabase.
+              <br><small>${error.message}</small>
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    // ========== MOSTRAR PRODUCTOS EN LA UI ==========
+    function mostrarProductos(productos) {
+      const contenedor = document.getElementById('productos-container');
+      
+      if (productos.length === 0) {
+        contenedor.innerHTML = `
+          <div class="col-12">
+            <p class="text-center text-muted">No hay productos disponibles en esta categoría.</p>
+          </div>
+        `;
+        return;
+      }
+
+      contenedor.innerHTML = '';
+
+      productos.forEach(producto => {
+        const col = document.createElement('div');
+        col.className = 'col-md-6 col-lg-4';
+        
+        // Crear badges de especificaciones si existen
+        let especificaciones = '';
+        if (producto.especificaciones && Array.isArray(producto.especificaciones)) {
+          especificaciones = producto.especificaciones.map(spec => 
+            `<span class="spec-badge">${spec}</span>`
+          ).join('');
+        }
+
+        col.innerHTML = `
+          <div class="product-card" data-categoria="${producto.categoria || ''}">
+            <div class="product-img">
+              <img src="${producto.imagen_url || 'img/placeholder.jpg'}" alt="${producto.nombre}">
+            </div>
+            <div class="card-body">
+              <div class="card-title">${producto.nombre}</div>
+              ${especificaciones ? `<div class="product-specs">${especificaciones}</div>` : ''}
+              <div class="text-muted" style="font-size:.88rem">${producto.descripcion || ''}</div>
+              <div class="product-price">S/ ${fmt(producto.precio)}</div>
+              <button class="btn-add" 
+                      data-id="${producto.id}"
+                      data-nombre="${escapeHtml(producto.nombre)}" 
+                      data-precio="${producto.precio}" 
+                      data-img="${producto.imagen_url || 'img/placeholder.jpg'}"
+                      ${producto.stock <= 0 ? 'disabled' : ''}>
+                <i class="fas fa-cart-plus me-2"></i>
+                ${producto.stock > 0 ? 'Agregar' : 'Sin stock'}
+              </button>
+              ${producto.stock > 0 && producto.stock <= 5 ? 
+                `<small class="text-warning d-block mt-2">¡Solo quedan ${producto.stock}!</small>` : ''}
+            </div>
+          </div>
+        `;
+        
+        contenedor.appendChild(col);
+      });
+    }
+
+    // ========== FILTRAR PRODUCTOS ==========
+    function filtrarProductos(categoria) {
+      filtroActual = categoria;
+      
+      if (categoria === 'todos') {
+        mostrarProductos(todosLosProductos);
+      } else {
+        const productosFiltrados = todosLosProductos.filter(p => 
+          p.categoria && p.categoria.toLowerCase() === categoria.toLowerCase()
+        );
+        mostrarProductos(productosFiltrados);
+      }
+    }
+
+    // ========== CARRITO - AÑADIR PRODUCTO ==========
+    async function addProductToCart(productoId, nombre, precio, imagen) {
+      // Convertir productoId a string para consistencia
+      productoId = String(productoId);
+      
+      // Verificar stock disponible en Supabase
+      try {
+        const { data: producto, error } = await supabase
+          .from('productos')
+          .select('stock')
+          .eq('id', productoId)
+          .single();
+
+        if (error) throw error;
+
+        const cantidadEnCarrito = carrito.find(p => String(p.id) === productoId)?.cantidad || 0;
+        
+        if (cantidadEnCarrito >= producto.stock) {
+          alert('No hay más stock disponible de este producto');
+          return false;
+        }
+
+        const idx = carrito.findIndex(p => String(p.id) === productoId);
+        if (idx >= 0) {
+          carrito[idx].cantidad += 1;
+        } else {
+          carrito.push({ id: productoId, nombre, precio: Number(precio), imagen, cantidad: 1 });
+        }
+        actualizarCarritoUI();
+        return true;
+      } catch (error) {
+        console.error('Error al verificar stock:', error);
+        alert('Error al verificar disponibilidad del producto');
+        return false;
+      }
+    }
+
+    // ========== CARRITO - ACTUALIZAR UI ==========
     function actualizarCarritoUI() {
       const countEl = document.getElementById('cart-count');
       const itemsContainer = document.getElementById('cart-items');
       const totalEl = document.getElementById('cart-total');
 
-      // limpiar
       itemsContainer.innerHTML = '';
-
-      // cuenta total
       const cantidadTotal = carrito.reduce((s, p) => s + p.cantidad, 0);
       countEl.textContent = cantidadTotal;
 
-      // si vacío
       if (carrito.length === 0) {
         itemsContainer.innerHTML = '<p class="text-muted">Tu carrito está vacío.</p>';
         totalEl.textContent = 'S/ 0.00';
@@ -449,7 +400,6 @@
         return;
       }
 
-      // render items
       let total = 0;
       carrito.forEach(p => {
         const subtotal = p.precio * p.cantidad;
@@ -466,106 +416,139 @@
           <div style="text-align:right">
             <div style="font-weight:800">S/ ${fmt(subtotal)}</div>
             <div class="mt-2 d-flex justify-content-end align-items-center">
-              <button class="btn btn-sm qty-btn-decrease" data-nombre="${escapeHtml(p.nombre)}">−</button>
+              <button class="btn btn-sm qty-btn-decrease" data-id="${p.id}">−</button>
               <div style="width:8px"></div>
-              <button class="btn btn-sm qty-btn-increase" data-nombre="${escapeHtml(p.nombre)}">+</button>
-              <button class="btn btn-sm btn-outline-danger ms-2 btn-remove" data-nombre="${escapeHtml(p.nombre)}" title="Eliminar"><i class="fas fa-trash"></i></button>
+              <button class="btn btn-sm qty-btn-increase" data-id="${p.id}">+</button>
+              <button class="btn btn-sm btn-outline-danger ms-2 btn-remove" data-id="${p.id}" title="Eliminar"><i class="fas fa-trash"></i></button>
             </div>
           </div>
         `;
         itemsContainer.appendChild(item);
       });
 
-      // guardar y mostrar total
       totalEl.textContent = 'S/ ' + fmt(total);
       localStorage.setItem('carrito', JSON.stringify(carrito));
       localStorage.setItem('totalCarrito', total.toFixed(2));
 
-      // attach events (delegación sería mejor, pero está bien aquí)
+      // Event listeners para botones del carrito
       document.querySelectorAll('.qty-btn-increase').forEach(btn => {
-        btn.addEventListener('click', () => changeQty(btn.dataset.nombre, +1));
+        btn.addEventListener('click', () => changeQty(btn.dataset.id, +1));
       });
       document.querySelectorAll('.qty-btn-decrease').forEach(btn => {
-        btn.addEventListener('click', () => changeQty(btn.dataset.nombre, -1));
+        btn.addEventListener('click', () => changeQty(btn.dataset.id, -1));
       });
       document.querySelectorAll('.btn-remove').forEach(btn => {
-        btn.addEventListener('click', () => removeItem(btn.dataset.nombre));
+        btn.addEventListener('click', () => removeItem(btn.dataset.id));
       });
     }
 
-    // seguridad: escapar strings usadas en atributos
-    function escapeHtml(str) {
-      return (''+str).replace(/"/g, '&quot;').replace(/'/g, '&#39;');
-    }
-
-    // Añadir producto
-    function addProductToCart(nombre, precio, imagen) {
-      const idx = carrito.findIndex(p => p.nombre === nombre);
-      if (idx >= 0) {
-        carrito[idx].cantidad += 1;
-      } else {
-        carrito.push({ nombre, precio: Number(precio), imagen, cantidad: 1 });
+    // ========== CARRITO - CAMBIAR CANTIDAD ==========
+    async function changeQty(productoId, delta) {
+      // Convertir productoId a string para comparación consistente
+      productoId = String(productoId);
+      console.log('changeQty llamado con ID:', productoId, 'delta:', delta);
+      console.log('Carrito actual:', carrito);
+      
+      const idx = carrito.findIndex(p => String(p.id) === productoId);
+      console.log('Índice encontrado:', idx);
+      
+      if (idx === -1) {
+        console.error('Producto no encontrado en carrito');
+        return;
       }
+
+      const nuevaCantidad = carrito[idx].cantidad + delta;
+
+      // Si disminuye a 0 o menos, eliminar
+      if (nuevaCantidad <= 0) {
+        carrito.splice(idx, 1);
+        actualizarCarritoUI();
+        return;
+      }
+
+      // Si aumenta, verificar stock
+      if (delta > 0) {
+        try {
+          const { data: producto, error } = await supabase
+            .from('productos')
+            .select('stock')
+            .eq('id', productoId)
+            .single();
+
+          if (error) throw error;
+
+          if (nuevaCantidad > producto.stock) {
+            alert('No hay suficiente stock disponible');
+            return;
+          }
+        } catch (error) {
+          console.error('Error al verificar stock:', error);
+          return;
+        }
+      }
+
+      carrito[idx].cantidad = nuevaCantidad;
       actualizarCarritoUI();
-      // pequeño feedback visual: no bloquear el botón aquí, lo hacemos en el clic
     }
 
-    // Cambiar cantidad
-    function changeQty(nombreEscaped, delta) {
-      const nombre = nombreEscaped.replace(/&quot;/g, '"').replace(/&#39;/g, "'");
-      const idx = carrito.findIndex(p => p.nombre === nombre);
-      if (idx === -1) return;
-      carrito[idx].cantidad += delta;
-      if (carrito[idx].cantidad <= 0) carrito.splice(idx, 1);
+    // ========== CARRITO - ELIMINAR ITEM ==========
+    function removeItem(productoId) {
+      // Convertir productoId a string para comparación consistente
+      productoId = String(productoId);
+      console.log('removeItem llamado con ID:', productoId);
+      console.log('Carrito antes de eliminar:', carrito);
+      
+      const longitudAntes = carrito.length;
+      carrito = carrito.filter(p => String(p.id) !== productoId);
+      
+      console.log('Carrito después de eliminar:', carrito);
+      console.log('Items eliminados:', longitudAntes - carrito.length);
+      
       actualizarCarritoUI();
     }
 
-    // Eliminar
-    function removeItem(nombreEscaped) {
-      const nombre = nombreEscaped.replace(/&quot;/g, '"').replace(/&#39;/g, "'");
-      carrito = carrito.filter(p => p.nombre !== nombre);
-      actualizarCarritoUI();
-    }
-
-    // Conectar botones "Agregar"
-    document.addEventListener('click', function(e) {
+    // ========== EVENT LISTENERS ==========
+    
+    // Agregar al carrito
+    document.addEventListener('click', async function(e) {
       const btn = e.target.closest('.btn-add');
-      if (!btn) return;
+      if (!btn || btn.disabled) return;
+      
+      const productoId = btn.dataset.id;
       const nombre = btn.dataset.nombre;
       const precio = Number(btn.dataset.precio);
-      const img = btn.dataset.img || 'img/no-image.png';
-      addProductToCart(nombre, precio, img);
-
-      // feedback temporal en el botón
+      const img = btn.dataset.img || 'img/placeholder.jpg';
+      
       const original = btn.innerHTML;
-      btn.innerHTML = '<i class="fas fa-check me-2"></i>Agregado';
+      btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Verificando...';
       btn.disabled = true;
-      setTimeout(() => { btn.innerHTML = original; btn.disabled = false; }, 700);
+
+      const agregado = await addProductToCart(productoId, nombre, precio, img);
+
+      if (agregado) {
+        btn.innerHTML = '<i class="fas fa-check me-2"></i>Agregado';
+        setTimeout(() => { 
+          btn.innerHTML = original; 
+          btn.disabled = false; 
+        }, 700);
+      } else {
+        btn.innerHTML = original;
+        btn.disabled = false;
+      }
     });
 
-    // Filters
+    // Filtros
     document.querySelectorAll('.filter-chip').forEach(chip => {
       chip.addEventListener('click', function() {
         document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
         this.classList.add('active');
         const filter = this.dataset.filter;
-        document.querySelectorAll('.product-card').forEach(card => {
-          const brand = card.dataset.brand || '';
-          const price = Number(card.dataset.price || 0);
-          let show = true;
-          if (filter === 'all') show = true;
-          else if (filter === 'budget') show = price <= 1500;
-          else if (filter === 'premium') show = price >= 3000;
-          else show = brand === filter;
-          const wrapper = card.closest('.col-md-6, .col-lg-4');
-          if (wrapper) wrapper.style.display = show ? 'block' : 'none';
-        });
+        filtrarProductos(filter);
       });
     });
 
-    // Checkout: verifica sesión y redirige
-    document.getElementById('checkout').addEventListener('click', function() {
-      // recalcular por seguridad
+    // Checkout
+    document.getElementById('checkout').addEventListener('click', async function() {
       const recalTotal = carrito.reduce((s,p)=> s + p.precio*p.cantidad, 0);
       localStorage.setItem('totalCarrito', recalTotal.toFixed(2));
       localStorage.setItem('carrito', JSON.stringify(carrito));
@@ -583,43 +566,97 @@
         return;
       }
 
-      window.location.href = 'pago.html';
-    });
+      // Confirmar compra
+      if (!confirm(`¿Confirmar compra por S/ ${fmt(recalTotal)}?`)) {
+        return;
+      }
 
-    // Inicializar UI en carga
-    document.addEventListener('DOMContentLoaded', () => {
-      // Si localStorage tiene carrito (con clave distinta a la versión previa), intentar migrar:
-      // soporte: si tienes items con estructura {sku,name,price,img,qty} los convertimos a la nueva estructura
+      // Actualizar stock en Supabase
       try {
-        const raw = localStorage.getItem('tiendapc_cart_v1') || localStorage.getItem('cart') || null;
-        if (raw && (!localStorage.getItem('carrito') || JSON.parse(localStorage.getItem('carrito')).length === 0)) {
-          // intentar parsear y mapear
-          try {
-            const parsed = JSON.parse(raw);
-            if (Array.isArray(parsed) && parsed.length > 0 && parsed[0].sku) {
-              carrito = parsed.map(i => ({
-                nombre: i.name || i.nombre || i.sku,
-                precio: Number(i.price || i.precio || i.data_price || 0),
-                imagen: i.img || i.image || i.data_img || 'img/no-image.png',
-                cantidad: i.qty || i.cantidad || 1
-              }));
-            }
-          } catch(e){}
-        }
-      } catch(e){}
+        this.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Procesando compra...';
+        this.disabled = true;
 
-      // render
-      actualizarCarritoUI();
+        console.log('Iniciando actualización de stock para:', carrito);
+
+        for (const item of carrito) {
+          const productoId = String(item.id);
+          console.log(`Procesando producto ID: ${productoId}, cantidad a restar: ${item.cantidad}`);
+          
+          // Obtener stock actual
+          const { data: producto, error: errorGet } = await supabase
+            .from('productos')
+            .select('stock')
+            .eq('id', productoId)
+            .single();
+
+          if (errorGet) {
+            console.error('Error al obtener stock:', errorGet);
+            throw errorGet;
+          }
+
+          console.log(`Stock actual de ${item.nombre}: ${producto.stock}`);
+
+          const nuevoStock = producto.stock - item.cantidad;
+
+          if (nuevoStock < 0) {
+            throw new Error(`No hay suficiente stock de ${item.nombre}`);
+          }
+
+          console.log(`Nuevo stock será: ${nuevoStock}`);
+
+          // Actualizar stock
+          const { data: dataUpdate, error: errorUpdate } = await supabase
+            .from('productos')
+            .update({ stock: nuevoStock })
+            .eq('id', productoId)
+            .select();
+
+          if (errorUpdate) {
+            console.error('Error al actualizar stock:', errorUpdate);
+            throw errorUpdate;
+          }
+
+          console.log('Stock actualizado exitosamente:', dataUpdate);
+        }
+
+        // Limpiar carrito
+        carrito = [];
+        localStorage.removeItem('carrito');
+        localStorage.setItem('totalCarrito', (0).toFixed(2));
+        actualizarCarritoUI();
+
+        // Recargar productos para mostrar stock actualizado
+        await cargarProductos();
+
+        alert('¡Compra realizada con éxito! El stock ha sido actualizado.');
+        
+        // Cerrar offcanvas
+        const offcanvas = bootstrap.Offcanvas.getInstance(document.getElementById('cartDrawer'));
+        if (offcanvas) offcanvas.hide();
+
+      } catch (error) {
+        console.error('Error al procesar compra:', error);
+        alert('Error al procesar la compra: ' + error.message);
+      } finally {
+        this.innerHTML = '<i class="fas fa-credit-card me-2"></i>Finalizar compra';
+        this.disabled = false;
+      }
     });
 
-    // Renderizar cart cada vez que se abre el offcanvas (para sincronizar si cambia desde otra tab)
+    // Actualizar carrito al abrir offcanvas
     const cartDrawer = document.getElementById('cartDrawer');
     cartDrawer.addEventListener('show.bs.offcanvas', function () {
-      // recargar carrito desde localStorage por si se modificó
       carrito = JSON.parse(localStorage.getItem('carrito')) || carrito;
       actualizarCarritoUI();
     });
 
+    // ========== INICIALIZACIÓN ==========
+    document.addEventListener('DOMContentLoaded', function() {
+      cargarProductos();
+      actualizarCarritoUI();
+    });
+
   </script>
+  <script src="auth.js"></script>
 </body>
 </html>

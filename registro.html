@@ -97,6 +97,7 @@
     }
   </style>
 </head>
+
 <body>
 
   <div class="card">
@@ -105,6 +106,7 @@
     </div>
 
     <div class="card-body p-4">
+
       <!-- Tabs -->
       <ul class="nav nav-tabs justify-content-center mb-4" id="authTabs" role="tablist">
         <li class="nav-item">
@@ -115,41 +117,43 @@
         </li>
       </ul>
 
-      <!-- Tab content -->
+      <!-- Contenido de Tabs -->
       <div class="tab-content" id="authTabsContent">
-        <!-- Login -->
+
+        <!-- LOGIN -->
         <div class="tab-pane fade show active" id="login" role="tabpanel">
           <form id="login-form">
             <div class="mb-3">
               <label class="form-label"><i class="fas fa-envelope me-2"></i>Correo electrónico</label>
-              <input type="email" class="form-control" id="login-email" placeholder="tu@email.com" required>
+              <input type="email" class="form-control" id="login-email" required>
             </div>
             <div class="mb-3">
               <label class="form-label"><i class="fas fa-lock me-2"></i>Contraseña</label>
-              <input type="password" class="form-control" id="login-password" placeholder="••••••" required>
+              <input type="password" class="form-control" id="login-password" required>
             </div>
             <button type="submit" class="btn btn-primary mt-3">Iniciar sesión</button>
           </form>
         </div>
 
-        <!-- Register -->
+        <!-- REGISTRO -->
         <div class="tab-pane fade" id="register" role="tabpanel">
           <form id="register-form">
             <div class="mb-3">
               <label class="form-label"><i class="fas fa-user me-2"></i>Nombre completo</label>
-              <input type="text" class="form-control" id="reg-nombre" placeholder="Tu nombre" required>
+              <input type="text" class="form-control" id="reg-nombre" required>
             </div>
             <div class="mb-3">
               <label class="form-label"><i class="fas fa-envelope me-2"></i>Correo electrónico</label>
-              <input type="email" class="form-control" id="reg-email" placeholder="tu@email.com" required>
+              <input type="email" class="form-control" id="reg-email" required>
             </div>
             <div class="mb-3">
               <label class="form-label"><i class="fas fa-lock me-2"></i>Contraseña</label>
-              <input type="password" class="form-control" id="reg-password" placeholder="Crea una contraseña" required>
+              <input type="password" class="form-control" id="reg-password" required>
             </div>
             <button type="submit" class="btn btn-primary mt-3">Crear cuenta</button>
           </form>
         </div>
+
       </div>
 
       <div class="text-center mt-4 text-muted">
@@ -161,46 +165,63 @@
   <!-- Bootstrap -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-  <!-- JS de registro -->
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
   <script>
-    const users = JSON.parse(localStorage.getItem("users")) || [];
+    /* 🔥 RELLENA ESTO CON TU PROYECTO 🔥 */
+    const supabaseUrl = "https://vxdfhmakqjmnevmovdhw.supabase.co";
+    const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ4ZGZobWFrcWptbmV2bW92ZGh3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ2MzYxNDAsImV4cCI6MjA4MDIxMjE0MH0.PhpdMBpEs0qGFtGtGYX9mL-Y5EI0qf219VviwETwb4M";
+    const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
-    // Registro
-    document.getElementById("register-form").addEventListener("submit", function(e){
+    /* ======================== */
+    /*   FUNCIONES DE REGISTRO  */
+    /* ======================== */
+    document.getElementById("register-form").addEventListener("submit", async (e) => {
       e.preventDefault();
-      const nombre = document.getElementById("reg-nombre").value.trim();
-      const email = document.getElementById("reg-email").value.trim();
-      const password = document.getElementById("reg-password").value.trim();
 
-      const existe = users.find(u => u.email === email);
-      if (existe) {
-        alert("Ya existe una cuenta con ese correo.");
+      const nombre = document.getElementById("reg-nombre").value;
+      const email = document.getElementById("reg-email").value;
+      const password = document.getElementById("reg-password").value;
+
+      const { error } = await supabase.auth.signUp({
+        email: email,
+        password: password,
+        options: {
+          data: { nombre: nombre }
+        }
+      });
+
+      if (error) {
+        alert("Error: " + error.message);
         return;
       }
 
-      users.push({ nombre, email, password });
-      localStorage.setItem("users", JSON.stringify(users));
-      localStorage.setItem("usuarioActivo", JSON.stringify({ nombre, email }));
-
-      alert("Registro exitoso. ¡Bienvenido a Tienda PC!");
-      window.location.href = "pago.html";
+      alert("Registro exitoso. Revisa tu correo.");
+      window.location.href = "productos.html";
     });
 
-    // Login
-    document.getElementById("login-form").addEventListener("submit", function(e){
+    /* ======================== */
+    /*        INICIAR SESIÓN    */
+    /* ======================== */
+    document.getElementById("login-form").addEventListener("submit", async (e) => {
       e.preventDefault();
-      const email = document.getElementById("login-email").value.trim();
-      const password = document.getElementById("login-password").value.trim();
 
-      const user = users.find(u => u.email === email && u.password === password);
-      if (!user) {
-        alert("Correo o contraseña incorrectos.");
+      const email = document.getElementById("login-email").value;
+      const password = document.getElementById("login-password").value;
+
+      const { error } = await supabase.auth.signInWithPassword({
+        email: email,
+        password: password
+      });
+
+      if (error) {
+        alert("Correo o contraseña incorrectos");
         return;
       }
 
-      localStorage.setItem("usuarioActivo", JSON.stringify(user));
-      alert("Inicio de sesión exitoso. Redirigiendo al pago...");
-      window.location.href = "pago.html";
+      alert("Inicio de sesión exitoso");
+      window.location.href = "productos.html";
     });
   </script>
 
