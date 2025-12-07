@@ -1,454 +1,558 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar Sesión - TiendaPC</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Iniciar Sesión - Tienda PC</title>
+  
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary: #0066ff;
+      --primary-dark: #0052cc;
+      --secondary: #00d4ff;
+      --dark: #0a0e27;
+      --dark-light: #1a1f3a;
+      --gradient: linear-gradient(135deg, #0066ff 0%, #00d4ff 100%);
+      --gradient-dark: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--gradient-dark);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+    }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
+    /* Efecto de partículas de fondo */
+    body::before {
+      content: '';
+      position: absolute;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(0, 102, 255, 0.1) 1px, transparent 1px);
+      background-size: 50px 50px;
+      animation: moveBackground 20s linear infinite;
+      pointer-events: none;
+    }
 
-        .login-container {
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            overflow: hidden;
-            max-width: 400px;
-            width: 100%;
-            animation: slideUp 0.5s ease-out;
-        }
+    @keyframes moveBackground {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(50px, 50px); }
+    }
 
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+    .login-container {
+      background: white;
+      border-radius: 24px;
+      box-shadow: 0 30px 90px rgba(0, 0, 0, 0.5);
+      overflow: hidden;
+      max-width: 450px;
+      width: 100%;
+      animation: slideUp 0.6s ease-out;
+      position: relative;
+      z-index: 2;
+    }
 
-        .login-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 30px;
-            text-align: center;
-        }
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-        .login-header h1 {
-            font-size: 28px;
-            margin-bottom: 5px;
-        }
+    .login-header {
+      background: var(--gradient);
+      color: white;
+      padding: 3rem 2rem;
+      text-align: center;
+      position: relative;
+    }
 
-        .login-header p {
-            font-size: 14px;
-            opacity: 0.9;
-        }
+    .login-header::after {
+      content: '';
+      position: absolute;
+      bottom: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 30px solid transparent;
+      border-right: 30px solid transparent;
+      border-top: 30px solid var(--secondary);
+    }
 
-        .login-form {
-            padding: 40px 30px;
-        }
+    .login-header i {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
 
-        .form-group {
-            margin-bottom: 25px;
-        }
+    .login-header h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+    }
 
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: #333;
-            font-weight: 500;
-            font-size: 14px;
-        }
+    .login-header p {
+      font-size: 0.95rem;
+      opacity: 0.95;
+      font-weight: 300;
+    }
 
-        .form-group input {
-            width: 100%;
-            padding: 12px 15px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 15px;
-            transition: all 0.3s ease;
-        }
+    .login-form {
+      padding: 3rem 2.5rem 2.5rem;
+    }
 
-        .form-group input:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-        }
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
 
-        .password-toggle {
-            position: relative;
-        }
+    .form-label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--dark);
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
 
-        .password-toggle input {
-            padding-right: 45px;
-        }
+    .form-control {
+      width: 100%;
+      padding: 0.9rem 1rem;
+      border: 2px solid #e9ecef;
+      border-radius: 12px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      font-family: 'Inter', sans-serif;
+    }
 
-        .toggle-btn {
-            position: absolute;
-            right: 12px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            cursor: pointer;
-            color: #666;
-            font-size: 18px;
-        }
+    .form-control:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(0, 102, 255, 0.1);
+    }
 
-        .forgot-password {
-            text-align: right;
-            margin-top: -15px;
-            margin-bottom: 20px;
-        }
+    .password-wrapper {
+      position: relative;
+    }
 
-        .forgot-password a {
-            color: #667eea;
-            text-decoration: none;
-            font-size: 13px;
-        }
+    .password-wrapper .form-control {
+      padding-right: 3rem;
+    }
 
-        .forgot-password a:hover {
-            text-decoration: underline;
-        }
+    .toggle-password {
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: #6c757d;
+      cursor: pointer;
+      font-size: 1.2rem;
+      transition: color 0.3s ease;
+    }
 
-        .btn-login {
-            width: 100%;
-            padding: 14px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
+    .toggle-password:hover {
+      color: var(--primary);
+    }
 
-        .btn-login:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
-        }
+    .forgot-password {
+      text-align: right;
+      margin-top: -0.5rem;
+      margin-bottom: 1.5rem;
+    }
 
-        .btn-login:active {
-            transform: translateY(0);
-        }
+    .forgot-password a {
+      color: var(--primary);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
 
-        .btn-login:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
+    .forgot-password a:hover {
+      color: var(--primary-dark);
+      text-decoration: underline;
+    }
 
-        .divider {
-            display: flex;
-            align-items: center;
-            margin: 25px 0;
-            color: #999;
-            font-size: 13px;
-        }
+    .btn-login {
+      width: 100%;
+      padding: 1rem;
+      background: var(--gradient);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 30px rgba(0, 102, 255, 0.3);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
 
-        .divider::before,
-        .divider::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: #e0e0e0;
-        }
+    .btn-login:hover:not(:disabled) {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(0, 102, 255, 0.5);
+    }
 
-        .divider span {
-            padding: 0 15px;
-        }
+    .btn-login:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
 
-        .register-link {
-            text-align: center;
-            margin-top: 25px;
-            color: #666;
-            font-size: 14px;
-        }
+    .divider {
+      display: flex;
+      align-items: center;
+      margin: 2rem 0;
+      color: #adb5bd;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
 
-        .register-link a {
-            color: #667eea;
-            text-decoration: none;
-            font-weight: 600;
-        }
+    .divider::before,
+    .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #dee2e6;
+    }
 
-        .register-link a:hover {
-            text-decoration: underline;
-        }
+    .divider span {
+      padding: 0 1rem;
+    }
 
-        .alert {
-            padding: 12px 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            font-size: 14px;
-            display: none;
-        }
+    .register-link {
+      text-align: center;
+      color: #6c757d;
+      font-size: 0.95rem;
+    }
 
-        .alert.show {
-            display: block;
-            animation: slideIn 0.3s ease-out;
-        }
+    .register-link a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 700;
+      transition: color 0.3s ease;
+    }
 
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+    .register-link a:hover {
+      color: var(--primary-dark);
+      text-decoration: underline;
+    }
 
-        .alert-error {
-            background-color: #fee;
-            color: #c33;
-            border: 1px solid #fcc;
-        }
+    .alert {
+      padding: 0.9rem 1rem;
+      border-radius: 10px;
+      margin-bottom: 1.5rem;
+      font-size: 0.9rem;
+      display: none;
+      animation: slideIn 0.4s ease-out;
+    }
 
-        .alert-success {
-            background-color: #efe;
-            color: #3c3;
-            border: 1px solid #cfc;
-        }
+    .alert.show { display: block; }
 
-        .back-home {
-            text-align: center;
-            margin-top: 20px;
-        }
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-15px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-        .back-home a {
-            color: #667eea;
-            text-decoration: none;
-            font-size: 14px;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-        }
+    .alert-danger {
+      background-color: #f8d7da;
+      color: #842029;
+      border: 1px solid #f5c2c7;
+    }
 
-        .back-home a:hover {
-            text-decoration: underline;
-        }
+    .alert-success {
+      background-color: #d1e7dd;
+      color: #0f5132;
+      border: 1px solid #badbcc;
+    }
 
-        @media (max-width: 480px) {
-            .login-container {
-                border-radius: 0;
-            }
-            
-            .login-form {
-                padding: 30px 20px;
-            }
-        }
-    </style>
+    .back-home {
+      text-align: center;
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid #e9ecef;
+    }
+
+    .back-home a {
+      color: #6c757d;
+      text-decoration: none;
+      font-size: 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: color 0.3s ease;
+    }
+
+    .back-home a:hover {
+      color: var(--primary);
+    }
+
+    @media (max-width: 576px) {
+      .login-form {
+        padding: 2.5rem 1.5rem 2rem;
+      }
+      
+      .login-header {
+        padding: 2rem 1.5rem;
+      }
+
+      .login-header h1 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="login-container">
-        <div class="login-header">
-            <h1>🖥️ TiendaPC</h1>
-            <p>Inicia sesión en tu cuenta</p>
-        </div>
 
-        <form class="login-form" id="loginForm">
-            <div class="alert alert-error" id="alertError"></div>
-            <div class="alert alert-success" id="alertSuccess"></div>
+<div class="login-container">
+  <div class="login-header">
+    <i class="fas fa-microchip"></i>
+    <h1>TIENDA PC</h1>
+    <p>Inicia sesión en tu cuenta</p>
+  </div>
 
-            <div class="form-group">
-                <label for="email">Correo Electrónico</label>
-                <input 
-                    type="email" 
-                    id="email" 
-                    name="email" 
-                    placeholder="tu@email.com"
-                    required
-                    autocomplete="email"
-                >
-            </div>
+  <form class="login-form" id="loginForm">
+    <div class="alert alert-danger" id="alertError" role="alert"></div>
+    <div class="alert alert-success" id="alertSuccess" role="alert"></div>
 
-            <div class="form-group">
-                <label for="password">Contraseña</label>
-                <div class="password-toggle">
-                    <input 
-                        type="password" 
-                        id="password" 
-                        name="password" 
-                        placeholder="••••••••"
-                        required
-                        autocomplete="current-password"
-                        minlength="6"
-                    >
-                    <button type="button" class="toggle-btn" id="togglePassword">
-                        👁️
-                    </button>
-                </div>
-            </div>
-
-            <div class="forgot-password">
-                <a href="#" id="forgotPasswordLink">¿Olvidaste tu contraseña?</a>
-            </div>
-
-            <button type="submit" class="btn-login" id="btnLogin">
-                Iniciar Sesión
-            </button>
-
-            <div class="divider">
-                <span>O</span>
-            </div>
-
-            <div class="register-link">
-                ¿No tienes cuenta? <a href="registro.html">Regístrate aquí</a>
-            </div>
-
-            <div class="back-home">
-                <a href="index.html">← Volver al inicio</a>
-            </div>
-        </form>
+    <div class="form-group">
+      <label for="email" class="form-label">
+        <i class="fas fa-envelope me-1"></i> Correo Electrónico
+      </label>
+      <input 
+        type="email" 
+        class="form-control" 
+        id="email" 
+        name="email" 
+        placeholder="tu@email.com"
+        required
+        autocomplete="email"
+      >
     </div>
 
-    <script type="module">
-        import { supabase } from './supabase.js';
+    <div class="form-group">
+      <label for="password" class="form-label">
+        <i class="fas fa-lock me-1"></i> Contraseña
+      </label>
+      <div class="password-wrapper">
+        <input 
+          type="password" 
+          class="form-control" 
+          id="password" 
+          name="password" 
+          placeholder="••••••••"
+          required
+          autocomplete="current-password"
+          minlength="6"
+        >
+        <button type="button" class="toggle-password" id="togglePassword">
+          <i class="fas fa-eye"></i>
+        </button>
+      </div>
+    </div>
 
-        // Toggle para mostrar/ocultar contraseña
-        const togglePassword = document.getElementById('togglePassword');
-        const passwordInput = document.getElementById('password');
+    <div class="forgot-password">
+      <a href="#" id="forgotPasswordLink">¿Olvidaste tu contraseña?</a>
+    </div>
 
-        togglePassword.addEventListener('click', function() {
-            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-            passwordInput.setAttribute('type', type);
-            this.textContent = type === 'password' ? '👁️' : '🙈';
-        });
+    <button type="submit" class="btn btn-login" id="btnLogin">
+      <i class="fas fa-sign-in-alt me-2"></i>Iniciar Sesión
+    </button>
 
-        // Función para mostrar alertas
-        function showAlert(message, type = 'error') {
-            const alertError = document.getElementById('alertError');
-            const alertSuccess = document.getElementById('alertSuccess');
-            
-            if (type === 'error') {
-                alertError.textContent = message;
-                alertError.classList.add('show');
-                alertSuccess.classList.remove('show');
-            } else {
-                alertSuccess.textContent = message;
-                alertSuccess.classList.add('show');
-                alertError.classList.remove('show');
-            }
+    <div class="divider">
+      <span>O</span>
+    </div>
 
-            setTimeout(() => {
-                alertError.classList.remove('show');
-                alertSuccess.classList.remove('show');
-            }, 5000);
+    <div class="register-link">
+      ¿No tienes cuenta? <a href="registro.html">Regístrate aquí</a>
+    </div>
+
+    <div class="back-home">
+      <a href="index.html">
+        <i class="fas fa-arrow-left"></i> Volver al inicio
+      </a>
+    </div>
+  </form>
+</div>
+
+<!-- Bootstrap -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Login Logic -->
+<script type="module">
+  import { supabase } from './supabase.js';
+
+  // Toggle para mostrar/ocultar contraseña
+  const togglePassword = document.getElementById('togglePassword');
+  const passwordInput = document.getElementById('password');
+
+  togglePassword.addEventListener('click', function() {
+    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+    passwordInput.setAttribute('type', type);
+    
+    const icon = this.querySelector('i');
+    icon.classList.toggle('fa-eye');
+    icon.classList.toggle('fa-eye-slash');
+  });
+
+  // Función para mostrar alertas
+  function showAlert(message, type = 'error') {
+    const alertError = document.getElementById('alertError');
+    const alertSuccess = document.getElementById('alertSuccess');
+    
+    if (type === 'error') {
+      alertError.innerHTML = `<i class="fas fa-exclamation-circle me-2"></i>${message}`;
+      alertError.classList.add('show');
+      alertSuccess.classList.remove('show');
+    } else {
+      alertSuccess.innerHTML = `<i class="fas fa-check-circle me-2"></i>${message}`;
+      alertSuccess.classList.add('show');
+      alertError.classList.remove('show');
+    }
+
+    setTimeout(() => {
+      alertError.classList.remove('show');
+      alertSuccess.classList.remove('show');
+    }, 5000);
+  }
+
+  // Verificar si ya hay sesión activa
+  const { data: { user } } = await supabase.auth.getUser();
+  if (user) {
+    window.location.href = 'index.html';
+  }
+
+  // Manejo del formulario de login
+  const loginForm = document.getElementById('loginForm');
+  const btnLogin = document.getElementById('btnLogin');
+
+  loginForm.addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value;
+
+    // Validación básica
+    if (!email || !password) {
+      showAlert('Por favor, completa todos los campos', 'error');
+      return;
+    }
+
+    if (password.length < 6) {
+      showAlert('La contraseña debe tener al menos 6 caracteres', 'error');
+      return;
+    }
+
+    // Deshabilitar botón mientras se procesa
+    btnLogin.disabled = true;
+    btnLogin.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Iniciando sesión...';
+
+    try {
+      // Autenticación con Supabase
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: email,
+        password: password
+      });
+
+      if (error) {
+        // Mensajes de error personalizados
+        let errorMessage = 'Error al iniciar sesión';
+        
+        if (error.message.includes('Invalid login credentials')) {
+          errorMessage = 'Correo o contraseña incorrectos';
+        } else if (error.message.includes('Email not confirmed')) {
+          errorMessage = 'Por favor, confirma tu correo electrónico';
+        } else if (error.message.includes('Invalid email')) {
+          errorMessage = 'El formato del correo no es válido';
+        } else {
+          errorMessage = error.message;
         }
+        
+        throw new Error(errorMessage);
+      }
 
-        // Verificar si ya hay sesión activa
-        const { data: { user } } = await supabase.auth.getUser();
-        if (user) {
-            // Ya hay sesión activa, redirigir
-            window.location.href = 'index.html';
-        }
+      // Login exitoso
+      showAlert('¡Inicio de sesión exitoso! Redirigiendo...', 'success');
+      
+      // Obtener rol del usuario y redirigir a su dashboard
+      const userRole = data.user.user_metadata?.rol || 'cliente';
+      
+      let redirectUrl = 'index.html';
+      switch(userRole) {
+        case 'gerente':
+          redirectUrl = 'dashboard-gerente.html';
+          break;
+        case 'empleado':
+          redirectUrl = 'dashboard-empleado.html';
+          break;
+        case 'cliente':
+          redirectUrl = 'dashboard-cliente.html';
+          break;
+      }
+      
+      // Redirigir después de 1 segundo
+      setTimeout(() => {
+        window.location.href = redirectUrl;
+      }, 1000);
 
-        // Manejo del formulario de login
-        const loginForm = document.getElementById('loginForm');
-        const btnLogin = document.getElementById('btnLogin');
+    } catch (error) {
+      console.error('Error de login:', error);
+      showAlert(error.message, 'error');
+      btnLogin.disabled = false;
+      btnLogin.innerHTML = '<i class="fas fa-sign-in-alt me-2"></i>Iniciar Sesión';
+    }
+  });
 
-        loginForm.addEventListener('submit', async function(e) {
-            e.preventDefault();
+  // Manejo de "Olvidé mi contraseña"
+  document.getElementById('forgotPasswordLink').addEventListener('click', async function(e) {
+    e.preventDefault();
+    
+    const email = document.getElementById('email').value.trim();
+    
+    if (!email) {
+      showAlert('Por favor, ingresa tu correo electrónico primero', 'error');
+      document.getElementById('email').focus();
+      return;
+    }
 
-            const email = document.getElementById('email').value.trim();
-            const password = document.getElementById('password').value;
+    try {
+      const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: `${window.location.origin}/reset-password.html`,
+      });
 
-            // Validación básica
-            if (!email || !password) {
-                showAlert('Por favor, completa todos los campos', 'error');
-                return;
-            }
+      if (error) throw error;
 
-            if (password.length < 6) {
-                showAlert('La contraseña debe tener al menos 6 caracteres', 'error');
-                return;
-            }
+      showAlert('Se ha enviado un correo de recuperación. Revisa tu bandeja de entrada.', 'success');
+    } catch (error) {
+      showAlert('Error al enviar correo de recuperación: ' + error.message, 'error');
+    }
+  });
+</script>
 
-            // Deshabilitar botón mientras se procesa
-            btnLogin.disabled = true;
-            btnLogin.textContent = 'Iniciando sesión...';
-
-            try {
-                // Autenticación con Supabase
-                const { data, error } = await supabase.auth.signInWithPassword({
-                    email: email,
-                    password: password
-                });
-
-                if (error) {
-                    // Mensajes de error personalizados
-                    let errorMessage = 'Error al iniciar sesión';
-                    
-                    if (error.message.includes('Invalid login credentials')) {
-                        errorMessage = 'Correo o contraseña incorrectos';
-                    } else if (error.message.includes('Email not confirmed')) {
-                        errorMessage = 'Por favor, confirma tu correo electrónico';
-                    } else if (error.message.includes('Invalid email')) {
-                        errorMessage = 'El formato del correo no es válido';
-                    } else {
-                        errorMessage = error.message;
-                    }
-                    
-                    throw new Error(errorMessage);
-                }
-
-                // Login exitoso
-                showAlert('¡Inicio de sesión exitoso! Redirigiendo...', 'success');
-                
-                // Redirigir después de 1 segundo
-                setTimeout(() => {
-                    window.location.href = 'index.html';
-                }, 1000);
-
-            } catch (error) {
-                console.error('Error de login:', error);
-                showAlert(error.message, 'error');
-                btnLogin.disabled = false;
-                btnLogin.textContent = 'Iniciar Sesión';
-            }
-        });
-
-        // Manejo de "Olvidé mi contraseña"
-        document.getElementById('forgotPasswordLink').addEventListener('click', async function(e) {
-            e.preventDefault();
-            
-            const email = document.getElementById('email').value.trim();
-            
-            if (!email) {
-                showAlert('Por favor, ingresa tu correo electrónico primero', 'error');
-                document.getElementById('email').focus();
-                return;
-            }
-
-            try {
-                const { error } = await supabase.auth.resetPasswordForEmail(email, {
-                    redirectTo: `${window.location.origin}/reset-password.html`,
-                });
-
-                if (error) throw error;
-
-                showAlert('Se ha enviado un correo de recuperación. Revisa tu bandeja de entrada.', 'success');
-            } catch (error) {
-                showAlert('Error al enviar correo de recuperación: ' + error.message, 'error');
-            }
-        });
-    </script>
 </body>
 </html>

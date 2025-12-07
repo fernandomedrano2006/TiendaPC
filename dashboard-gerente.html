@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Panel Gerente - Tienda PC</title>
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary: #ffc107;
+      --secondary: #ff9800;
+      --dark: #0a0e27;
+      --gradient: linear-gradient(135deg, #ffc107 0%, #ff9800 100%);
+    }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f8f9fa;
+      min-height: 100vh;
+    }
+
+    .navbar {
+      background: var(--gradient);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .dashboard-container {
+      padding: 2rem 0;
+    }
+
+    .welcome-card {
+      background: var(--gradient);
+      color: white;
+      border-radius: 20px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 10px 40px rgba(255, 193, 7, 0.2);
+    }
+
+    .stats-card {
+      background: white;
+      border-radius: 16px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      transition: transform 0.3s ease;
+      height: 100%;
+    }
+
+    .stats-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .stats-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .icon-primary { background: rgba(255, 193, 7, 0.1); color: var(--primary); }
+    .icon-success { background: rgba(40, 167, 69, 0.1); color: #28a745; }
+    .icon-info { background: rgba(0, 102, 255, 0.1); color: #0066ff; }
+    .icon-danger { background: rgba(220, 53, 69, 0.1); color: #dc3545; }
+
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+      color: var(--dark);
+    }
+
+    .quick-action {
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-align: center;
+      text-decoration: none;
+      color: var(--dark);
+      transition: all 0.3s ease;
+      display: block;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      height: 100%;
+    }
+
+    .quick-action:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 25px rgba(255, 193, 7, 0.15);
+      color: var(--primary);
+    }
+
+    .quick-action i {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      display: block;
+      color: var(--primary);
+    }
+
+    .chart-card {
+      background: white;
+      border-radius: 16px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      margin-bottom: 1.5rem;
+    }
+
+    .user-row {
+      background: white;
+      border-radius: 12px;
+      padding: 1rem;
+      margin-bottom: 0.75rem;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .role-badge {
+      padding: 0.25rem 0.75rem;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.85rem;
+    }
+
+    .role-cliente { background: #e3f2fd; color: #0066ff; }
+    .role-empleado { background: #e8f5e9; color: #28a745; }
+    .role-gerente { background: #fff3cd; color: #856404; }
+
+    .pedido-card {
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+    }
+
+    .pedido-card:hover {
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .pedido-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #e9ecef;
+    }
+
+    .pedido-estado {
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 0.85rem;
+    }
+
+    .estado-pendiente { background: #fff3cd; color: #856404; }
+    .estado-procesando { background: #cfe2ff; color: #084298; }
+    .estado-enviado { background: #d1e7dd; color: #0a3622; }
+    .estado-entregado { background: #d1e7dd; color: #0f5132; }
+    .estado-cancelado { background: #f8d7da; color: #842029; }
+
+    .pedido-items {
+      margin: 1rem 0;
+    }
+
+    .pedido-item {
+      display: flex;
+      gap: 1rem;
+      padding: 0.75rem;
+      background: #f8f9fa;
+      border-radius: 8px;
+      margin-bottom: 0.5rem;
+    }
+
+    .pedido-item-img {
+      width: 50px;
+      height: 50px;
+      object-fit: contain;
+      border-radius: 6px;
+      background: white;
+      padding: 0.25rem;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <i class="fas fa-microchip me-2"></i>TIENDA PC
+      </a>
+      <div class="ms-auto">
+        <div id="user-info"></div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="dashboard-container">
+    <div class="container">
+      
+      <div class="welcome-card">
+        <h1 class="mb-2">
+          <i class="fas fa-user-shield me-2"></i>
+          Panel de Gerente - <span id="user-name">Gerente</span>
+        </h1>
+        <p class="mb-0 opacity-75">Control total del sistema y reportes administrativos</p>
+      </div>
+
+      <div class="row g-4 mb-4">
+        <div class="col-md-3 col-sm-6">
+          <div class="stats-card">
+            <div class="stats-icon icon-success">
+              <i class="fas fa-dollar-sign"></i>
+            </div>
+            <h3 class="mb-1" id="ventas-totales">S/ 0.00</h3>
+            <p class="text-muted mb-0">Ventas Totales</p>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+          <div class="stats-card">
+            <div class="stats-icon icon-info">
+              <i class="fas fa-shopping-cart"></i>
+            </div>
+            <h3 class="mb-1" id="ordenes-total">0</h3>
+            <p class="text-muted mb-0">Órdenes Procesadas</p>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+          <div class="stats-card">
+            <div class="stats-icon icon-primary">
+              <i class="fas fa-users"></i>
+            </div>
+            <h3 class="mb-1" id="usuarios-total">3</h3>
+            <p class="text-muted mb-0">Usuarios Activos</p>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+          <div class="stats-card">
+            <div class="stats-icon icon-danger">
+              <i class="fas fa-box"></i>
+            </div>
+            <h3 class="mb-1" id="productos-total">0</h3>
+            <p class="text-muted mb-0">Productos en Tienda</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row g-4 mb-4">
+        <div class="col-md-2 col-6">
+          <a href="#" class="quick-action" onclick="mostrarSeccion('estadisticas'); return false;">
+            <i class="fas fa-chart-line"></i>
+            <h6>Estadísticas</h6>
+          </a>
+        </div>
+        <div class="col-md-2 col-6">
+          <a href="#" class="quick-action" onclick="mostrarSeccion('pedidos'); return false;">
+            <i class="fas fa-clipboard-list"></i>
+            <h6>Pedidos</h6>
+          </a>
+        </div>
+        <div class="col-md-2 col-6">
+          <a href="#" class="quick-action" onclick="mostrarUsuarios(); return false;">
+            <i class="fas fa-users-cog"></i>
+            <h6>Usuarios</h6>
+          </a>
+        </div>
+        <div class="col-md-2 col-6">
+          <a href="dashboard-empleado.html" class="quick-action">
+            <i class="fas fa-warehouse"></i>
+            <h6>Inventario</h6>
+          </a>
+        </div>
+        <div class="col-md-2 col-6">
+          <a href="#" class="quick-action">
+            <i class="fas fa-cog"></i>
+            <h6>Configuración</h6>
+          </a>
+        </div>
+        <div class="col-md-2 col-6">
+          <a href="productos.html" class="quick-action">
+            <i class="fas fa-store"></i>
+            <h6>Tienda</h6>
+          </a>
+        </div>
+      </div>
+
+      <div id="main-content">
+        <div id="estadisticas-section">
+          <div class="row g-4 mb-4">
+            <div class="col-md-6">
+              <div class="chart-card">
+                <h5 class="mb-3">
+                  <i class="fas fa-chart-bar me-2"></i>Ventas Mensuales
+                </h5>
+                <div class="text-center py-4">
+                  <i class="fas fa-chart-area fa-4x text-muted mb-3"></i>
+                  <p class="text-muted">Gráfico de ventas mensuales</p>
+                  <small class="text-muted">Próximamente: Integración con datos reales</small>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="chart-card">
+                <h5 class="mb-3">
+                  <i class="fas fa-boxes me-2"></i>Productos Más Vendidos
+                </h5>
+                <div class="text-center py-4">
+                  <i class="fas fa-chart-pie fa-4x text-muted mb-3"></i>
+                  <p class="text-muted">Top 5 productos</p>
+                  <small class="text-muted">Próximamente: Ranking de productos</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <h2 class="section-title">
+            <i class="fas fa-users me-2"></i>Gestión de Usuarios
+          </h2>
+
+          <div id="usuarios-container">
+            <div class="user-row">
+              <div class="row align-items-center">
+                <div class="col-md-4">
+                  <i class="fas fa-user-circle me-2 text-primary"></i>
+                  <strong>kyreiaylin@gmail.com</strong>
+                </div>
+                <div class="col-md-3">
+                  <span class="role-badge role-cliente">Cliente</span>
+                </div>
+                <div class="col-md-3">
+                  <small class="text-muted">Registrado: Dic 2024</small>
+                </div>
+                <div class="col-md-2">
+                  <span class="badge bg-success">Activo</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="user-row">
+              <div class="row align-items-center">
+                <div class="col-md-4">
+                  <i class="fas fa-user-tie me-2 text-success"></i>
+                  <strong>jhon.medrano.2006@gmail.com</strong>
+                </div>
+                <div class="col-md-3">
+                  <span class="role-badge role-empleado">Empleado</span>
+                </div>
+                <div class="col-md-3">
+                  <small class="text-muted">Registrado: Dic 2024</small>
+                </div>
+                <div class="col-md-2">
+                  <span class="badge bg-success">Activo</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="user-row">
+              <div class="row align-items-center">
+                <div class="col-md-4">
+                  <i class="fas fa-user-shield me-2 text-warning"></i>
+                  <strong>nayarayap@gmail.com</strong>
+                </div>
+                <div class="col-md-3">
+                  <span class="role-badge role-gerente">Gerente</span>
+                </div>
+                <div class="col-md-3">
+                  <small class="text-muted">Registrado: Dic 2024</small>
+                </div>
+                <div class="col-md-2">
+                  <span class="badge bg-success">Activo</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="alert alert-info mt-4">
+            <i class="fas fa-info-circle me-2"></i>
+            <strong>Nota:</strong> Como gerente, tienes acceso completo a todas las funcionalidades del sistema. 
+            Usa esta herramienta de forma responsable.
+          </div>
+        </div>
+
+        <div id="pedidos-section" style="display: none;">
+          <h2 class="section-title">
+            <i class="fas fa-clipboard-list me-2"></i>Gestión de Pedidos
+          </h2>
+          
+          <div class="mb-3">
+            <button class="btn btn-success" onclick="cargarPedidos()">
+              <i class="fas fa-sync-alt me-2"></i>Actualizar Pedidos
+            </button>
+            <div class="btn-group ms-2" role="group">
+              <button class="btn btn-outline-secondary active" onclick="filtrarPedidos('todos')">Todos</button>
+              <button class="btn btn-outline-warning" onclick="filtrarPedidos('pendiente')">Pendientes</button>
+              <button class="btn btn-outline-primary" onclick="filtrarPedidos('procesando')">Procesando</button>
+              <button class="btn btn-outline-success" onclick="filtrarPedidos('enviado')">Enviados</button>
+              <button class="btn btn-outline-info" onclick="filtrarPedidos('entregado')">Entregados</button>
+            </div>
+          </div>
+
+          <div id="pedidos-container">
+            <div class="text-center py-5">
+              <i class="fas fa-spinner fa-spin fa-3x text-muted mb-3"></i>
+              <p class="text-muted">Cargando pedidos...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <script type="module">
+    import { supabase } from './supabase.js';
+    import { renderUserInNav, requireAuth, getCurrentUser, hasRole } from './session.js';
+
+    // Proteger la página - solo gerentes
+    await requireAuth();
+
+    const user = await getCurrentUser();
+    if (user && !await hasRole('gerente')) {
+      alert('No tienes permisos para acceder a esta página');
+      window.location.href = 'index.html';
+    }
+
+    await renderUserInNav();
+
+    if (user) {
+      const nombre = user.user_metadata?.nombre || user.email.split('@')[0];
+      document.getElementById('user-name').textContent = nombre;
+    }
+
+    // Cargar estadísticas
+    async function cargarEstadisticas() {
+      try {
+        // Total de productos
+        const { data: productos, error: errorProductos } = await supabase
+          .from('productos')
+          .select('id, precio, stock');
+
+        if (!errorProductos && productos) {
+          document.getElementById('productos-total').textContent = productos.length;
+        }
+
+        // Aquí puedes agregar más estadísticas reales cuando tengas tabla de ventas
+        // Por ahora mostramos datos de ejemplo
+        document.getElementById('ventas-totales').textContent = 'S/ 15,480.00';
+        document.getElementById('ordenes-total').textContent = '47';
+        
+      } catch (error) {
+        console.error('Error al cargar estadísticas:', error);
+      }
+    }
+
+    cargarEstadisticas();
+
+    // Función para mostrar secciones
+    window.mostrarSeccion = function(seccion) {
+      const estadisticasSection = document.getElementById('estadisticas-section');
+      const pedidosSection = document.getElementById('pedidos-section');
+
+      if (seccion === 'estadisticas') {
+        estadisticasSection.style.display = 'block';
+        pedidosSection.style.display = 'none';
+      } else if (seccion === 'pedidos') {
+        estadisticasSection.style.display = 'none';
+        pedidosSection.style.display = 'block';
+        cargarPedidos();
+      }
+    };
+
+    let todosPedidos = [];
+
+    // Cargar pedidos
+    window.cargarPedidos = async function() {
+      const container = document.getElementById('pedidos-container');
+      container.innerHTML = '<div class="text-center py-3"><i class="fas fa-spinner fa-spin fa-2x"></i></div>';
+
+      try {
+        const { data: pedidos, error } = await supabase
+          .from('pedidos')
+          .select(`
+            *,
+            pedido_items (*)
+          `)
+          .order('created_at', { ascending: false });
+
+        if (error) throw error;
+
+        todosPedidos = pedidos;
+
+        if (pedidos.length === 0) {
+          container.innerHTML = `
+            <div class="text-center py-5">
+              <i class="fas fa-inbox fa-3x text-muted mb-3"></i>
+              <p class="text-muted">No hay pedidos registrados</p>
+            </div>
+          `;
+          // Actualizar estadísticas
+          document.getElementById('ordenes-total').textContent = '0';
+          document.getElementById('ventas-totales').textContent = 'S/ 0.00';
+          return;
+        }
+
+        // Actualizar estadísticas
+        const totalVentas = pedidos.reduce((sum, p) => sum + Number(p.total), 0);
+        document.getElementById('ordenes-total').textContent = pedidos.length;
+        document.getElementById('ventas-totales').textContent = 'S/ ' + totalVentas.toFixed(2);
+
+        mostrarPedidos(pedidos);
+
+      } catch (error) {
+        console.error('Error al cargar pedidos:', error);
+        container.innerHTML = `
+          <div class="alert alert-danger">
+            <i class="fas fa-exclamation-triangle me-2"></i>
+            Error al cargar pedidos: ${error.message}
+          </div>
+        `;
+      }
+    };
+
+    // Mostrar pedidos
+    function mostrarPedidos(pedidos) {
+      const container = document.getElementById('pedidos-container');
+      container.innerHTML = '';
+
+      pedidos.forEach(pedido => {
+        const fecha = new Date(pedido.created_at).toLocaleDateString('es-ES', {
+          day: '2-digit',
+          month: 'long',
+          year: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit'
+        });
+
+        const card = document.createElement('div');
+        card.className = 'pedido-card';
+        card.innerHTML = `
+          <div class="pedido-header">
+            <div>
+              <h5 class="mb-1">
+                <i class="fas fa-shopping-bag me-2"></i>
+                Pedido #${pedido.id.substring(0, 8)}
+              </h5>
+              <p class="text-muted mb-1">
+                <i class="fas fa-user me-2"></i>${pedido.nombre_usuario}
+                <span class="ms-3"><i class="fas fa-envelope me-2"></i>${pedido.email_usuario}</span>
+              </p>
+              <p class="text-muted mb-0">
+                <i class="fas fa-clock me-2"></i>${fecha}
+              </p>
+            </div>
+            <div>
+              <span class="pedido-estado estado-${pedido.estado}">
+                ${pedido.estado.toUpperCase()}
+              </span>
+            </div>
+          </div>
+
+          <div class="pedido-items">
+            ${pedido.pedido_items.map(item => `
+              <div class="pedido-item">
+                <img src="${item.imagen_url || 'img/placeholder.jpg'}" 
+                     alt="${item.nombre_producto}"
+                     class="pedido-item-img">
+                <div class="flex-grow-1">
+                  <strong>${item.nombre_producto}</strong>
+                  <div class="text-muted">
+                    <small>S/ ${Number(item.precio).toFixed(2)} x ${item.cantidad} = 
+                    S/ ${Number(item.subtotal).toFixed(2)}</small>
+                  </div>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+
+          <div class="d-flex justify-content-between align-items-center mt-3 pt-3 border-top">
+            <div>
+              <strong>Total:</strong>
+              <h4 class="d-inline ms-2 mb-0" style="color: #ffc107;">S/ ${Number(pedido.total).toFixed(2)}</h4>
+            </div>
+            <div>
+              <select class="form-select form-select-sm d-inline-block w-auto me-2" 
+                      onchange="cambiarEstadoPedido('${pedido.id}', this.value)">
+                <option value="pendiente" ${pedido.estado === 'pendiente' ? 'selected' : ''}>Pendiente</option>
+                <option value="procesando" ${pedido.estado === 'procesando' ? 'selected' : ''}>Procesando</option>
+                <option value="enviado" ${pedido.estado === 'enviado' ? 'selected' : ''}>Enviado</option>
+                <option value="entregado" ${pedido.estado === 'entregado' ? 'selected' : ''}>Entregado</option>
+                <option value="cancelado" ${pedido.estado === 'cancelado' ? 'selected' : ''}>Cancelado</option>
+              </select>
+              <button class="btn btn-sm btn-danger" 
+                      onclick="eliminarPedido('${pedido.id}')">
+                <i class="fas fa-trash me-1"></i>Eliminar
+              </button>
+            </div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    // Cambiar estado del pedido
+    window.cambiarEstadoPedido = async function(pedidoId, nuevoEstado) {
+      try {
+        const { error } = await supabase
+          .from('pedidos')
+          .update({ estado: nuevoEstado })
+          .eq('id', pedidoId);
+
+        if (error) throw error;
+
+        cargarPedidos();
+      } catch (error) {
+        alert('Error al cambiar estado: ' + error.message);
+      }
+    };
+
+    // Eliminar pedido
+    window.eliminarPedido = async function(pedidoId) {
+      if (!confirm('¿Estás seguro de eliminar este pedido? Esta acción no se puede deshacer.')) {
+        return;
+      }
+
+      try {
+        const { error } = await supabase
+          .from('pedidos')
+          .delete()
+          .eq('id', pedidoId);
+
+        if (error) throw error;
+
+        cargarPedidos();
+      } catch (error) {
+        alert('Error al eliminar pedido: ' + error.message);
+      }
+    };
+
+    // Filtrar pedidos por estado
+    window.filtrarPedidos = function(estado) {
+      document.querySelectorAll('.btn-group button').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      event.target.classList.add('active');
+
+      if (estado === 'todos') {
+        mostrarPedidos(todosPedidos);
+      } else {
+        const pedidosFiltrados = todosPedidos.filter(p => p.estado === estado);
+        mostrarPedidos(pedidosFiltrados);
+      }
+    };
+
+    // Función para mostrar usuarios
+    window.mostrarUsuarios = function() {
+      mostrarSeccion('estadisticas');
+      document.getElementById('usuarios-container').scrollIntoView({ behavior: 'smooth' });
+    };
+  </script>
+</body>
+</html>

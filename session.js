@@ -125,15 +125,33 @@ export async function initSession() {
 
 /**
  * Verificar si el usuario tiene un rol específico (para permisos)
- * @param {string} role - Rol a verificar
+ * @param {string|string[]} roles - Rol(es) a verificar
  * @returns {boolean}
  */
-export async function hasRole(role) {
+export async function hasRole(roles) {
   const user = await getCurrentUser();
   if (!user) return false;
   
-  const userRole = user.user_metadata?.role || 'user';
-  return userRole === role;
+  const userRole = user.user_metadata?.rol || 'cliente';
+  
+  // Si roles es un array, verificar si el usuario tiene alguno de esos roles
+  if (Array.isArray(roles)) {
+    return roles.includes(userRole);
+  }
+  
+  // Si es un string, verificar si coincide
+  return userRole === roles;
+}
+
+/**
+ * Obtener el rol del usuario actual
+ * @returns {string} Rol del usuario ('cliente', 'empleado', 'gerente')
+ */
+export async function getUserRole() {
+  const user = await getCurrentUser();
+  if (!user) return null;
+  
+  return user.user_metadata?.rol || 'cliente';
 }
 
 /**
